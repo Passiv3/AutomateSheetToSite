@@ -4,8 +4,8 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 from selenium import webdriver
-
 driver = webdriver.Chrome()
+driver.get()
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
