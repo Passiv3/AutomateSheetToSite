@@ -1,6 +1,3 @@
-# This is a sample Python script.
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import openpyxl.utils.exceptions as openpyxl_exceptions
 from selenium import webdriver
 from openpyxl import load_workbook
@@ -15,7 +12,10 @@ def entrypoint():
         print("read_file failed, try again...")
         wb = read_file()
     print_sheets(wb)
-    select_sheet(wb)
+    sheet = select_sheet(wb)
+    while sheet is None:
+        sheet = select_sheet(wb)
+    parse_for_data(sheet)
 
 
 def get_number_input():
@@ -60,14 +60,17 @@ def select_sheet(workbook):
     print("Which sheet would you like to use?")
     user_input = input()
     if user_input in workbook.sheetnames:
-        print("Copying "+ user_input)
+        print("Copying " + user_input)
         current_worksheet = workbook[user_input]
+        return current_worksheet
     else:
-        print(user_input + " sheet not found.")
+        print("The sheet: " + user_input + " was not found.")
+        return None
 
 
-def parse_for_data(workbook, worksheet_number=0):
-
+def parse_for_data(current_worksheet):
+    current_cell = current_worksheet['A8']
+    print(current_cell)
     pass
 
 
