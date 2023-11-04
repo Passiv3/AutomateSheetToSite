@@ -18,17 +18,6 @@ def entrypoint():
     parse_for_data(sheet)
 
 
-def get_number_input():
-    print("Which sheet did you want to read from?")
-    try:
-        sheet_number = int(input())
-    except TypeError:
-        print("Incorrect type!")
-        get_number_input()
-    else:
-        return sheet_number
-
-
 def read_file():
     """
     Prints a prompt for user
@@ -69,8 +58,8 @@ def select_sheet(workbook):
 
 
 def parse_for_data(current_worksheet):
-    current_cell = current_worksheet['A8']
-    print(current_cell)
+    current_cell = current_worksheet['B8']
+    print(current_cell.value)
     pass
 
 
