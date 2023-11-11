@@ -59,15 +59,23 @@ def select_sheet(workbook):
 
 
 def parse_for_data(current_worksheet):
+    """
+    Parses a worksheet for data, returns a list of data
+    """
     list_of_rows = []
     for x in range(8, 35):
+        temp_list = []
         for row in current_worksheet[x]:
-            row_dict = {}
             if row.value is not None:
-                print(row.value[0])
-    #current_cell = current_worksheet['C8']
-    #print(current_cell.value)
-    pass
+                if type(row.value) is datetime.datetime:
+                    date_format = row.value.strftime('%m/%d/%Y')
+                    temp_list.append(date_format)
+                else:
+                    temp_list.append(row.value)
+            if len(temp_list) != 0:
+                list_of_rows.append(temp_list)
+    print(list_of_rows)
+    return list_of_rows
 
 
 # Press the green button in the gutter to run the script.
