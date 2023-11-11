@@ -1,9 +1,15 @@
 from selenium import webdriver
 
-
-driver = webdriver.Chrome()
-# url: https://app.informedk12.com/link_campaigns/morgan-hill-travel-reimbursement-claim-electronic-form?token=fgtwSdEWCn8npWkHbYDbjfQH
+mileage_url = "https://app.informedk12.com/link_campaigns/morgan-hill-travel-reimbursement-claim-electronic-form?token=fgtwSdEWCn8npWkHbYDbjfQH"
 
 
-if __name__ == '__selenium_section__':
-    pass
+#first 48829198
+#last 48829359
+
+
+def entrypoint():
+    driver = webdriver.Chrome()
+    driver.get(mileage_url)
+
+
+entrypoint()
