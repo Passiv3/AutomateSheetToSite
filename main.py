@@ -1,4 +1,5 @@
 import openpyxl.utils.exceptions as openpyxl_exceptions
+import datetime
 from selenium import webdriver
 from openpyxl import load_workbook
 
@@ -28,7 +29,7 @@ def read_file():
     print("Enter the name of the mileage sheet. Don't forget the extension: ")
     user_input_filename = input()
     try:
-        workbook = load_workbook(filename=user_input_filename)
+        workbook = load_workbook(filename=user_input_filename, data_only=True)
     except FileNotFoundError:
         print("File not found")
         return None
@@ -58,8 +59,14 @@ def select_sheet(workbook):
 
 
 def parse_for_data(current_worksheet):
-    current_cell = current_worksheet['B8']
-    print(current_cell.value)
+    list_of_rows = []
+    for x in range(8, 35):
+        for row in current_worksheet[x]:
+            row_dict = {}
+            if row.value is not None:
+                print(row.value[0])
+    #current_cell = current_worksheet['C8']
+    #print(current_cell.value)
     pass
 
 
