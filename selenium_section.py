@@ -15,6 +15,7 @@ def entrypoint(user_info, list_of_rows):
     main_driver = webdriver.Chrome(options=options)
     main_driver.get(mileage_url)
     fill_name(main_driver, user_info)
+    locate_first_cell(main_driver)
 
 
 def fill_name(driver, user_info):
@@ -29,8 +30,11 @@ def fill_name(driver, user_info):
 
 def locate_first_cell(driver):
     driver.implicitly_wait(4)
-    driver.find_element()
+    return driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/form/div[4]/div[1]/div[2]/div/span[14]/span/input[2]")
+
+
+def fill_row():
     pass
 
 
-entrypoint({'name': 'Danny Chung', 'email': 'chungdanny56@gmail.com'}, [])
+entrypoint({'name': 'Danny Chung', 'email': 'chungdanny56@gmail.com'}, [['11/12/2023', 'District Office', 'Britton', 'RT', 'Fix Technology', '5.2'], ['11/12/2023', 'District Office', 'Sobrato', 'OW', 'Fix Technology', '10.5']])

@@ -4,7 +4,8 @@ import selenium_section
 
 def main():
     user_info = get_user_info()
-    openpyxl_section.entrypoint()
+    spreadsheet_data = openpyxl_section.entrypoint()
+    selenium_section.entrypoint(user_info, spreadsheet_data)
 
 
 def get_user_info():
