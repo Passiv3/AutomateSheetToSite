@@ -1,30 +1,36 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
 mileage_url = "https://app.informedk12.com/link_campaigns/morgan-hill-travel-reimbursement-claim-electronic-form?token=fgtwSdEWCn8npWkHbYDbjfQH"
 
 
-#first 48829198
-#last 48829359
+# first 48829198
+# last 48829359
 
 
-def entrypoint(list_of_rows=[]):
+def entrypoint(user_info, list_of_rows):
     options = Options()
     options.add_experimental_option("detach", True)
-    driver = webdriver.Chrome(options=options)
-    driver.get(mileage_url)
+    main_driver = webdriver.Chrome(options=options)
+    main_driver.get(mileage_url)
+    fill_name(main_driver, user_info)
 
 
-def get_user_info():
-    print("Enter your name: ")
-    name = input()
-    print("Enter your email: ")
-    email = input()
-    user_info = {name: name, email: email}
-    return user_info
+def fill_name(driver, user_info):
+    """Waits for about 4 seconds for webpage elements to load
+    Locates elements and enters name and email"""
+    driver.implicitly_wait(4)
+    driver.find_element(By.ID, "recipient_name").send_keys(user_info['name'])
+    driver.find_element(By.ID, "recipient_email").send_keys(user_info['email'])
+    driver.find_element(By.NAME, "commit").click()
+    return
 
 
-def locate_first_cell():
+def locate_first_cell(driver):
+    driver.implicitly_wait(4)
+    driver.find_element()
     pass
 
-entrypoint()
+
+entrypoint({'name': 'Danny Chung', 'email': 'chungdanny56@gmail.com'}, [])
