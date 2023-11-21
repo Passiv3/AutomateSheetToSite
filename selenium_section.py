@@ -13,9 +13,11 @@ def entrypoint(user_info, list_of_rows):
     options = Options()
     options.add_experimental_option("detach", True)
     main_driver = webdriver.Chrome(options=options)
+
     main_driver.get(mileage_url)
+
     fill_name(main_driver, user_info)
-    locate_first_cell(main_driver)
+    fill_sheet(main_driver, list_of_rows)
 
 
 def fill_name(driver, user_info):
@@ -28,13 +30,20 @@ def fill_name(driver, user_info):
     return
 
 
-def locate_first_cell(driver):
+def fill_sheet(driver, data):
+    # Locate first element
     driver.implicitly_wait(4)
-    return driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/form/div[4]/div[1]/div[2]/div/span[14]/span/input[2]")
+    current_id = 48829198
+    type_counter = 0
+    types = ["input", "textarea", "textarea", "select", "textarea", "textarea"]
+    for row in data:
+        type_counter = 0
+        for value in row:
+            xpath = f"//{types[type_counter]}[@data-field-id={current_id}]"
+            driver.find_element(By.XPATH, xpath).send_keys(value)
+            type_counter += 1
+            current_id += 1
+    return
 
 
-def fill_row():
-    pass
-
-
-entrypoint({'name': 'Danny Chung', 'email': 'chungdanny56@gmail.com'}, [['11/12/2023', 'District Office', 'Britton', 'RT', 'Fix Technology', '5.2'], ['11/12/2023', 'District Office', 'Sobrato', 'OW', 'Fix Technology', '10.5']])
+#entrypoint({'name': 'Danny Chung', 'email': 'chungdanny56@gmail.com'}, [['11/12/2023', 'District Office', 'Britton', 'RT', 'Fix Technology', '5.2'], ['11/12/2023', 'District Office', 'Sobrato', 'OW', 'Fix Technology', '10.5']])
