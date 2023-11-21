@@ -73,7 +73,7 @@ def parse_for_data(current_worksheet):
                     temp_list.append(date_format)
                 else:
                     temp_list.append(row.value)
-            if len(temp_list) != 0:
-                list_of_rows.append(temp_list)
+        if len(temp_list) != 0:
+            list_of_rows.append(temp_list)
     print(list_of_rows)
     return list_of_rows
