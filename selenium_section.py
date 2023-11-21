@@ -44,6 +44,3 @@ def fill_sheet(driver, data):
             type_counter += 1
             current_id += 1
     return
-
-
-#entrypoint({'name': 'Danny Chung', 'email': 'chungdanny56@gmail.com'}, [['11/12/2023', 'District Office', 'Britton', 'RT', 'Fix Technology', '5.2'], ['11/12/2023', 'District Office', 'Sobrato', 'OW', 'Fix Technology', '10.5']])

@@ -4,6 +4,7 @@ from openpyxl import load_workbook
 
 
 def entrypoint():
+    print("Ensure spreadsheet is downloaded and in same directory")
     wb = read_file()
     while wb is None:
         print("read_file failed, try again...")

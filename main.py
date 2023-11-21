@@ -6,10 +6,11 @@ def main():
     user_info = get_user_info()
     spreadsheet_data = openpyxl_section.entrypoint()
     selenium_section.entrypoint(user_info, spreadsheet_data)
+    print("Be sure to double check everything before submitting!")
 
 
 def get_user_info():
-    print("Enter your name: ")
+    print("Enter your full name: ")
     name = input()
     print("Enter your email: ")
     email = input()
