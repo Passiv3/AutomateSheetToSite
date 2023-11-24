@@ -23,7 +23,7 @@ def read_file():
     Validates input
     Returns
     """
-    print("Enter the name of the mileage sheet. Don't forget the extension: ")
+    print("Enter the name of the spreadsheet file. Don't forget the extension: ")
     user_input_filename = input()
     try:
         workbook = load_workbook(filename=user_input_filename, data_only=True)

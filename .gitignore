@@ -1,1 +1,24 @@
-/Unofficial_Mileage_Tracker.xlsx
+# Byte-compiled / optimized files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+*.env
+
+# IDE files
+.idea/
+*.iml
+
+# Compiled Python files
+*.pyc
+*.pyo
+
+# Logs and temporary files
+*.log
+*.swp
+*.tmp
+.DS_Store

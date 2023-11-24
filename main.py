@@ -3,6 +3,11 @@ import selenium_section
 
 
 def main():
+    print("-------------------------------------------------------")
+    print("Greetings. This is a program to automate the \n"
+          "transfer of your mileage from the excel sheet \n"
+          "to the webpage.")
+    print("-------------------------------------------------------")
     user_info = get_user_info()
     spreadsheet_data = openpyxl_section.entrypoint()
     selenium_section.entrypoint(user_info, spreadsheet_data)
