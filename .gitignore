@@ -22,3 +22,8 @@ env/
 *.swp
 *.tmp
 .DS_Store
+
+# Pyinstaller
+build/
+dist/
+*.spec
