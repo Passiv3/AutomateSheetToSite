@@ -19,6 +19,9 @@ def get_user_info():
     name = input()
     print("Enter your email: ")
     email = input()
+    while "@" not in email:
+        print("Must enter valid email: ")
+        email = input()
     user_info = {'name': name, 'email': email}
     return user_info
 
