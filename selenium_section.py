@@ -37,7 +37,7 @@ def fill_sheet(driver, data):
     """
     # Locate first element, xpath points to first date field, get attribute to get correct id
     driver.implicitly_wait(4)
-    first_element = driver.find_element(By.XPATH, "/html/body/main/div/div/div[2]/form/div[4]/div[1]/div[2]/div/span[14]/span/input[2]")
+    first_element = driver.find_element(By.XPATH, "/html/body/main/div/div/div[2]/form/div[4]/div[1]/div[3]/div/span[14]/span/input[2]")
     current_id = int(first_element.get_attribute("data-field-id"))
     # these are the form input types corresponding to each column of the form, here to help specify xpath
     types = ["input", "textarea", "textarea", "select", "textarea", "textarea"]
