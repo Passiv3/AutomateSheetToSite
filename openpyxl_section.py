@@ -3,6 +3,9 @@ import datetime
 from openpyxl import load_workbook
 
 
+#Temporarily disabling to decouple a big function chain because I want to use various methods in the main page
+
+"""
 def entrypoint():
     print("Ensure spreadsheet is downloaded and in same directory")
     wb = read_file()
@@ -11,17 +14,23 @@ def entrypoint():
         wb = read_file()
     print_sheets(wb)
     sheet = select_sheet(wb)
-    while sheet is None:
-        sheet = select_sheet(wb)
     return parse_for_data(sheet)
+"""
 
+def get_wb():
+    print("Ensure spreadsheet is downloaded and in same directory")
+    wb = read_file()
+    while wb is None:
+        print("read_file failed, try again...")
+        wb = read_file()
+    print_sheets(wb)
+    return wb
 
 def read_file():
     """
     Prints a prompt for user
     Receives string input
     Validates input
-    Returns
     """
     print("Enter the name of the spreadsheet file. Don't forget the extension: ")
     user_input_filename = input()
@@ -49,15 +58,15 @@ def select_sheet(workbook):
     :param workbook:
     :return:
     """
-    print("Which sheet would you like to use?")
-    user_input = input()
-    if user_input in workbook.sheetnames:
-        print("Copying " + user_input)
-        current_worksheet = workbook[user_input]
-        return current_worksheet
-    else:
-        print("The sheet: " + user_input + " was not found.")
-        return None
+    while True:
+        print("Which sheet would you like to use?")
+        user_input = input()
+        if user_input in workbook.sheetnames:
+            print("Copying " + user_input)
+            current_worksheet = workbook[user_input]
+            return current_worksheet
+        else:
+            print("The sheet: " + user_input + " was not found.")
 
 
 def parse_for_data(current_worksheet):
