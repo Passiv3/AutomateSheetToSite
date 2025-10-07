@@ -3,28 +3,14 @@ import datetime
 from openpyxl import load_workbook
 
 
-#Temporarily disabling to decouple a big function chain because I want to use various methods in the main page
-
-"""
-def entrypoint():
-    print("Ensure spreadsheet is downloaded and in same directory")
-    wb = read_file()
-    while wb is None:
-        print("read_file failed, try again...")
-        wb = read_file()
-    print_sheets(wb)
-    sheet = select_sheet(wb)
-    return parse_for_data(sheet)
-"""
-
 def get_wb():
     print("Ensure spreadsheet is downloaded and in same directory")
-    wb = read_file()
-    while wb is None:
-        print("read_file failed, try again...")
+    while True:
         wb = read_file()
-    print_sheets(wb)
-    return wb
+        if wb:
+            return wb
+        else:
+            print("read_file failed, try again...")
 
 def read_file():
     """
@@ -60,6 +46,7 @@ def select_sheet(workbook):
     """
     while True:
         print("Which sheet would you like to use?")
+        print_sheets(workbook)
         user_input = input()
         if user_input in workbook.sheetnames:
             print("Copying " + user_input)

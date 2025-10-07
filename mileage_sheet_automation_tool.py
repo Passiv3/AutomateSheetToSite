@@ -10,9 +10,10 @@ def main():
           "to the webpage.")
     print("-------------------------------------------------------")
     user_info = get_user_info()
-    spreadsheet_data = openpyxl_section.entrypoint()
+    current_wb = openpyxl_section.get_wb()
     while additional_sheet:
-        selenium_section.entrypoint(user_info, spreadsheet_data)
+        current_sheet = openpyxl_section.select_sheet(current_wb)
+        selenium_section.entrypoint(user_info, openpyxl_section.parse_for_data(current_sheet))
         additional_sheet = input("Do you want to copy another mileage form? (Y/N)").lower().startswith('y')
     print("Be sure to double check everything before submitting! Enter personal information and budget account number")
 
@@ -28,13 +29,6 @@ def get_user_info():
     user_info = {'name': name, 'email': email}
     return user_info
 
-def openpyxl_base():
-    print("Ensure spreadsheet is downloaded and in same directory")
-    wb = openpyxl_section.read_file()
-    while wb is None:
-        print("read_file failed, try again...")
-        wb = openpyxl_section.read_file()
-    openpyxl_section.print_sheets(wb)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
