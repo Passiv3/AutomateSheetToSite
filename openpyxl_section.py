@@ -3,25 +3,20 @@ import datetime
 from openpyxl import load_workbook
 
 
-def entrypoint():
+def get_wb():
     print("Ensure spreadsheet is downloaded and in same directory")
-    wb = read_file()
-    while wb is None:
-        print("read_file failed, try again...")
+    while True:
         wb = read_file()
-    print_sheets(wb)
-    sheet = select_sheet(wb)
-    while sheet is None:
-        sheet = select_sheet(wb)
-    return parse_for_data(sheet)
-
+        if wb:
+            return wb
+        else:
+            print("read_file failed, try again...")
 
 def read_file():
     """
     Prints a prompt for user
     Receives string input
     Validates input
-    Returns
     """
     print("Enter the name of the spreadsheet file. Don't forget the extension: ")
     user_input_filename = input()
@@ -49,15 +44,16 @@ def select_sheet(workbook):
     :param workbook:
     :return:
     """
-    print("Which sheet would you like to use?")
-    user_input = input()
-    if user_input in workbook.sheetnames:
-        print("Copying " + user_input)
-        current_worksheet = workbook[user_input]
-        return current_worksheet
-    else:
-        print("The sheet: " + user_input + " was not found.")
-        return None
+    while True:
+        print("Which sheet would you like to use?")
+        print_sheets(workbook)
+        user_input = input()
+        if user_input in workbook.sheetnames:
+            print("Copying " + user_input)
+            current_worksheet = workbook[user_input]
+            return current_worksheet
+        else:
+            print("The sheet: " + user_input + " was not found.")
 
 
 def parse_for_data(current_worksheet):

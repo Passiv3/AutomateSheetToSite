@@ -3,14 +3,18 @@ import selenium_section
 
 
 def main():
+    additional_sheet = True
     print("-------------------------------------------------------")
     print("Greetings. This is a program to automate the \n"
           "transfer of your mileage from the excel sheet \n"
           "to the webpage.")
     print("-------------------------------------------------------")
     user_info = get_user_info()
-    spreadsheet_data = openpyxl_section.entrypoint()
-    selenium_section.entrypoint(user_info, spreadsheet_data)
+    current_wb = openpyxl_section.get_wb()
+    while additional_sheet:
+        current_sheet = openpyxl_section.select_sheet(current_wb)
+        selenium_section.entrypoint(user_info, openpyxl_section.parse_for_data(current_sheet))
+        additional_sheet = input("Do you want to copy another mileage form? (Y/N)").lower().startswith('y')
     print("Be sure to double check everything before submitting! Enter personal information and budget account number")
 
 
